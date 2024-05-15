@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Item {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  CartItem    CartItem[]
+}
+
+model CartItem {
+  cartItemId Int   @id @default(autoincrement())
+  item       Item  @relation(fields: [itemId], references: [id])
+  itemId     Int
+  quantity   Int
+  Cart       Cart? @relation(fields: [cartId], references: [id])
+  cartId     Int?
+}
+
+model Cart {
+  id        Int        @id @default(autoincrement())
+  cartItems CartItem[]
+  User      User[]
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+  cart     Cart?  @relation(fields: [cartId], references: [id])
+  cartId   Int?
+}

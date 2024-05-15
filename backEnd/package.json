@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Api de mon site de e-commerce",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "migration:save": "npx prisma migrate dev --name init",
+    "migration:up": "npx prisma migrate dev",
+    "initDb": "node ./prisma/initDb.js"
+  },
+  "author": "Andre Abel",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "prisma": "^5.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "keywords": []
+}
