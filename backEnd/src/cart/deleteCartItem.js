@@ -1,10 +1,11 @@
 const prisma = require('../../prisma/client');
 
 const deleteCartItem = async (req, res) => {
+    const { id } = req.params;
     
-    const item = await prisma.item.findUnique({
+    const item = await prisma.cartItem.findFirst({
         where: {
-            id: parseInt(id)
+            itemId: parseInt(id)
         }
     });
 
@@ -14,10 +15,10 @@ const deleteCartItem = async (req, res) => {
 
     const cartItem = await prisma.cartItem.delete({
         where: {
-            id: parseInt(id)
+            cartItemId: parseInt(item.cartItemId)
         }
     });
 
-    res.status(200).send( "Item deleted successfully")
+    return res.status(200).send( "Item deleted successfully")
 }
 module.exports = deleteCartItem;

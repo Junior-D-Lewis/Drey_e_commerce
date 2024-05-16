@@ -6,7 +6,7 @@ const updateCartItem = async (req, res) => {
 
     const cartItem = await prisma.cartItem.update({
         where: {
-            id: parseInt(id)
+            cartItemId: parseInt(id)
         },
         data: {
             quantity: parseInt(quantity)
